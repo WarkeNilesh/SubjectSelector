@@ -6,11 +6,10 @@ import useFetch from "../../../hooks/useFetch";
 
 const Student = (props) => {
   
-  const {data} = props;
+  const {data,role} = props;
  
   // console.log(data);
-  let role;
-  {(data.isadmin)?role = 'admin':role = 'student'}
+ 
   return (
     <div className="Student">
     

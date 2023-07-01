@@ -1,8 +1,6 @@
 import User from "../models/User.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-import dotenv from "dotenv"
-dotenv.config();
 
 export const register = async (req, res) => {
     const user = req.body;
@@ -26,7 +24,7 @@ export const login = async (req, res) => {
         const isPasswordCorrect = await bcrypt.compare(req.body.password,user.password)
         if(!isPasswordCorrect)  return res.status(500).send("password didn't match");
         
-        const token = jwt.sign({"username":user.username, "isStudent": user.isStudent},process.env.JWT);  //secret key
+        const token = jwt.sign({"username":user.username, "isadmin": user.isadmin},process.env.JWT);  //secret key
         // to prevent sending password and is admin to user
         const {password, ...otherDetails} = user._doc;
         res.cookie("access_token",token,{

@@ -13,8 +13,8 @@ const Home = (props) => {
       <div className="homeContainer">
       
         <div className="widgets">
-          <Widget style = {{paddingLeft : '10px'}} choice ="student" />
-          <Widget style = {{paddingLeft : '10px'}} choice ="course" />
+          <Widget  choice ="student" />
+          <Widget  choice ="course" />
   
         </div>
         

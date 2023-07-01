@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
 import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
 import "./newentity.css";
 
 
@@ -199,24 +200,60 @@ const Newentity = (props) => {
   }
 
 
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(URL.createObjectURL(file));
+  };
+
+  const handleRemoveImage = () => {
+    setSelectedImage(null);
+  };
+
+
   return (
     <div className="new">
       
       <div className="newContainer">
       <Sidebar role = {role} />
-        <div className="top" >
+        <div className="topnew" >
           <h1> ADD NEW {uppercaseChoice}</h1>
         </div>
         <div className="bottom">
           <div className="left">
-            <img className="Img"
+           
+
+<div>
+      {selectedImage ? (
+        <div>
+          <img src={selectedImage} alt="Selected" width="300" height="300" />
+          <Button onClick={handleRemoveImage}>Remove Image</Button>
+        </div>
+      ) : (
+        <div>
+           <img className="Img"
               src={
                 files
                   ? URL.createObjectURL(files[0])
                   : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
               }
               alt=""
-            />
+              height={'300px'} />
+          <Input
+            accept="image/*"
+            id="image-upload"
+            type="file"
+            onChange={handleImageUpload}
+          />
+          <label htmlFor="image-upload">
+            <Button component="span">
+              Upload Image
+            </Button>
+          </label>
+        </div>
+      )}
+    </div>
           </div>
           <div className="right">
             

@@ -13,12 +13,11 @@ const UserSchema = new mongoose.Schema({
     },
     "isadmin" : {
         type : Boolean,
-        required : false,
         default: false
     },
     "email": {
         type : String,
-        required: false
+        
     },
     "courses" : {
         type : [Object],
@@ -33,7 +32,8 @@ const UserSchema = new mongoose.Schema({
         type : String,
         required: true
     },
-})
+    
+},{timestamps:true})
 
 
 export default mongoose.model('users', UserSchema);

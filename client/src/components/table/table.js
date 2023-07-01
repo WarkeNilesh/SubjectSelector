@@ -35,11 +35,11 @@ const All = (props) => {
     case "dashboard":
       tableHeader = (
         <>
-          <TableCell className="tableCell"  align="center" valign="middle" >USERNAME</TableCell>
-          <TableCell className="tableCell"  align="center" valign="middle" >NAME</TableCell>
-          <TableCell className="tableCell"  align="center" valign="middle" >EMAIL</TableCell>
-          <TableCell className="tableCell"  align="center" valign="middle" >COURSES</TableCell>
-          <TableCell className="tableCell"  align="center" valign="middle" >ACTION</TableCell>
+          <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}}  >USERNAME</TableCell>
+          <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >NAME</TableCell>
+          <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >EMAIL</TableCell>
+          <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >COURSES</TableCell>
+          <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >ACTION</TableCell>
         </>
       );
       tableBody = (
@@ -49,7 +49,7 @@ const All = (props) => {
           ) : (
             data &&
             data.map((data) => (
-              <TableRow key={data.username}>
+              <TableRow key={data.username} className="tablerow">
                 <TableCell className="tableCell" align="center" valign="middle">
                   <Link
                     to="/"
@@ -97,11 +97,11 @@ const All = (props) => {
     case "student":
       tableHeader = (
         <>
-          <TableCell className="tableCell"  align="center" valign="middle" >PRN</TableCell>
-          <TableCell className="tableCell"  align="center" valign="middle" >Name</TableCell>
-          <TableCell className="tableCell"  align="center" valign="middle" >College mail ID</TableCell>
-          <TableCell className="tableCell"  align="center" valign="middle" >Contact no</TableCell>
-          <TableCell className="tableCell"  align="center" valign="middle" >Action</TableCell>
+          <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >PRN</TableCell>
+          <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >Name</TableCell>
+          <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >College mail ID</TableCell>
+          <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >Contact no</TableCell>
+          <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >Action</TableCell>
         </>
       );
       tableBody = (
@@ -111,7 +111,7 @@ const All = (props) => {
           ) : (
             data &&
             data.map((data) => (
-              <TableRow key={data.username}>
+              <TableRow key={data.username} className="tablerow">
                 <TableCell className="tableCell" align="center" valign="middle">
                   <Link
                     to="/"
@@ -154,10 +154,10 @@ const All = (props) => {
     case "course":
       tableHeader = (
         <>
-          <TableCell className="tableCell"  align="center" valign="middle" >Course Code</TableCell>
-          <TableCell className="tableCell"  align="center" valign="middle" >Course Name</TableCell>
-          <TableCell className="tableCell"  align="center" valign="middle" >Faculty</TableCell>
-          <TableCell className="tableCell"  align="center" valign="middle" >Action</TableCell>
+          <TableCell style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} className="tableCell"  align="center" valign="middle" >Course Code</TableCell>
+          <TableCell style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} className="tableCell"  align="center" valign="middle" >Course Name</TableCell>
+          <TableCell style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} className="tableCell"  align="center" valign="middle" >Faculty</TableCell>
+          <TableCell style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} className="tableCell"  align="center" valign="middle" >Action</TableCell>
         </>
       );
       tableBody = (
@@ -167,7 +167,7 @@ const All = (props) => {
           ) : (
             data &&
             data.map((data) => (
-              <TableRow key={data.course_code}>
+              <TableRow key={data.course_code} className="tablerow">
                 <TableCell className="tableCell" align="center" valign="middle">
                   <Link
                     to="/"

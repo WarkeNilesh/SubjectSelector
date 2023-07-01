@@ -29,14 +29,14 @@ const Widget = ({ choice }) => {
   return (
     <div className="widget">
       <div className="left">
-        <span className="title"> TOTAL {CHOICE}S</span>
+        <span className="title" style={{textAlign:'center'}}> TOTAL {CHOICE}S</span>
         {loading
                     ? "loading..."
                     :(
-        <span className="counter">
+        <span className="counter" style={{textAlign:'center'}}>
           {data.count}
         </span>)}
-        <Link to={`/${choice}s`}>  <span className="link">All {choice}s</span> </Link>
+        <Link to={`/${choice}s`}>  <span className="link" style={{textAlign:'center'}} >All {choice}s</span> </Link>
        
       </div>
     </div>

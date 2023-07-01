@@ -17,4 +17,6 @@
 .tableCell {
   text-align: center;
   border: 1px solid black;
+  
 }
+.tablerow:hover {background-color: #e4e8ec;}

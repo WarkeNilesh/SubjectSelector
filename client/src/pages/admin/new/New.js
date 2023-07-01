@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 const New = (props) => {
  
-  const {data,choices} = props;
+  const {role,choices} = props;
  
   const [choice, setChoice] = useState(null);
   useEffect(() => {
@@ -18,8 +18,6 @@ const New = (props) => {
   
   const CHOICE = choice ? choice.toUpperCase() : "";
 
-  let role;
-  {(data.isadmin)?role = 'admin':role = 'student'}
   return (
     <div className="new">
        <Sidebar  role = {role}/>

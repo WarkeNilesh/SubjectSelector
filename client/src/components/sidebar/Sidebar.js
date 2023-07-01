@@ -30,6 +30,9 @@ import { Link } from 'react-router-dom';
 const drawerWidth =240 ;
 
 
+const handleLogout = () => {
+  localStorage.setItem('userData', JSON.stringify(null));
+};
 
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -121,10 +124,11 @@ export default function PersistentDrawerLeft(props) {
       ['course', <LibraryBooksIcon />],
       ['profile', <ManageAccountsIcon />],
        ['Logout', <LogoutIcon />] ,].map((text) => (
-      
+        
         <Link to={"/"+text[0]} style={{ textDecoration: "none" ,color:"black"} }>
         <ListItem key={text[0]} disablePadding>
-          <ListItemButton>
+
+          <ListItemButton onClick={text[0] === 'Logout' ? handleLogout : null}>
             <ListItemIcon>
             {text[1] }
             </ListItemIcon>
