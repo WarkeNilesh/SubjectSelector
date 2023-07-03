@@ -40,13 +40,13 @@ const featuredPosts = [
 ];
 
 
-const New = (props) => {
-    const { role } = props;
-
+const New = () => {
+   
+  
 
     return (
         <div className="course">
-            <Sidebar role={role} />
+            <Sidebar />
 
 
             <div className="newContainer" >

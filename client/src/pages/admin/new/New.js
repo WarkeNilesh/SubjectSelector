@@ -1,26 +1,21 @@
 import "./new.css";
 import Sidebar from "../../../components/sidebar/Sidebar";
-import All from "../../../components/table/table"
 import { Link } from "react-router-dom";
 import Button from '@mui/material/Button'
 import { useEffect, useState } from "react";
-
+import Studenttable from '../../../components/table/studenttable';
+import Coursetable from '../../../components/table/coursetable';
 
 const New = (props) => {
  
-  const {role,choices} = props;
+  const {choice} = props;
  
-  const [choice, setChoice] = useState(null);
-  useEffect(() => {
-    setChoice(choices);
-  }, [choices]);
-
   
   const CHOICE = choice ? choice.toUpperCase() : "";
 
   return (
     <div className="new">
-       <Sidebar  role = {role}/>
+       <Sidebar />
       <div className="newContainer">
      
         <div className="top" style={{margin: '20px', marginTop :'100px', padding:'0px', paddingLeft:'30px'}}>
@@ -30,7 +25,7 @@ const New = (props) => {
           </Link>
         </div>
         <div className="students">
-      {choice === "student"?<All page = "student" />: <All  page = "course"/>}
+      {choice === "student"?<Studenttable />: <Coursetable />}
          
           
         </div>

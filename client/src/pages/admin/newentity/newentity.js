@@ -8,9 +8,8 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Input from '@mui/material/Input';
 import "./newentity.css";
 
 
@@ -18,52 +17,38 @@ const Newentity = (props) => {
   const { role,choice } = props;
   const uppercaseChoice = choice.toUpperCase();
 
-  const [files, setFiles] = useState("");
-  const [info, setInfo] = useState({});
-  const [rooms, setRooms] = useState([]);
 
-  
-
-  const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  const handlestudent = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      'username' : formData.get('username'),
+      'name' : formData.get('name'),
+      'email' : formData.get('email'),
+      'contact_no': formData.get('contact_no'),
+      'password':formData.get('password')
+    }
+    // console.log(data);
+    try {
+      await axios.post("/auth/register", data);
+    } 
+    catch (err) {console.log(err)}
   };
 
-  const handleSelect = (e) => {
-    const value = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value
-    );
-    setRooms(value);
-  };
-  
-  console.log(files)
-
+ 
   const handleClick = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      'course_code' : formData.get('course_code'),
+      'name' : formData.get('course_name'),
+      'faculty' : formData.get('faculty')
+    }
+    // console.log(data);
     try {
-      const list = await Promise.all(
-        Object.values(files).map(async (file) => {
-          const data = new FormData();
-          data.append("file", file);
-          data.append("upload_preset", "upload");
-          const uploadRes = await axios.post(
-            "https://api.cloudinary.com/v1_1/lamadev/image/upload",
-            data
-          );
-
-          const { url } = uploadRes.data;
-          return url;
-        })
-      );
-
-      const newhotel = {
-        ...info,
-        rooms,
-        photos: list,
-      };
-
-      await axios.post("/hotels", newhotel);
-    } catch (err) {console.log(err)}
+      await axios.post("http://127.0.0.1:8800/api/course/create", data);
+    } 
+    catch (err) {console.log(err)}
   };
 
 
@@ -80,66 +65,67 @@ const Newentity = (props) => {
             <Typography variant="h6" gutterBottom>
         New_User
       </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="firstName"
-            name="firstName"
-            label="First name"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label="Last name"
-            fullWidth
-            autoComplete="family-name"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="PRN"
-            name="address1"
-            label="PRN"
-            fullWidth
-            autoComplete="shipping address-line1"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="Email_id"
-            name="address2"
-            label="College_Email_id"
-            fullWidth
-            autoComplete="shipping address-line2"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="Number"
-            name="address2"
-            label="Phone_Number"
-            fullWidth
-            autoComplete="shipping address-line2"
-            variant="standard"
-          />
-       
-        </Grid>
-        <Grid item xs={12}>
-        <Button className="Button" variant="contained">SUBMIT</Button>
-        </Grid>
+      <Box component="form" noValidate onClick={handlestudent} sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="name"
+                label="name"
+                
+                id="name"
+                autoComplete="name"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="email"
+                label="email"
+                id="email"
+                autoComplete="email"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="password"
+                id="password"
+                autoComplete="password"
+              />
+               <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="contact_no"
+                label="contact_no"
+                id="contact_no"
+                autoComplete="contact_no"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                SUBMIT
+              </Button>
+              
+
+            </Box>
         
-      </Grid>
+     
             </form>
         </>
       );
@@ -152,45 +138,47 @@ const Newentity = (props) => {
             <Typography variant="h6" gutterBottom>
         New_Course
       </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="Course"
-            name="address1"
-            label="Course_name"
-            fullWidth
-            autoComplete="shipping address-line1"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id=""
-            name="address2"
-            label="Course_code"
-            fullWidth
-            autoComplete="shipping address-line2"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="Course"
-            name="address1"
-            label="Course_description"
-            fullWidth
-            autoComplete="shipping address-line1"
-            variant="standard"
-          />
-        </Grid>
-        
-        <Grid item xs={12}>
-        <Button className="Button" variant="contained">SUBMIT</Button>
-        </Grid>
-        
-      </Grid>
+      <Box component="form" noValidate onClick={handleClick} sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="course_name"
+                label="course_name"
+                name="course_name"
+                autoComplete="course_name"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="course_code"
+                label="course_code"
+                
+                id="course_code"
+                autoComplete="course_code"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="faculty"
+                label="faculty"
+                id="faculty"
+                autoComplete="faculty"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                SUBMIT
+              </Button>
+              
+
+            </Box>
             </form>
         </>
       );
@@ -200,61 +188,16 @@ const Newentity = (props) => {
   }
 
 
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    setSelectedImage(URL.createObjectURL(file));
-  };
-
-  const handleRemoveImage = () => {
-    setSelectedImage(null);
-  };
-
-
   return (
     <div className="new">
       
       <div className="newContainer">
       <Sidebar role = {role} />
-        <div className="topnew" >
+        <div className="top" >
           <h1> ADD NEW {uppercaseChoice}</h1>
         </div>
         <div className="bottom">
-          <div className="left">
-           
-
-<div>
-      {selectedImage ? (
-        <div>
-          <img src={selectedImage} alt="Selected" width="300" height="300" />
-          <Button onClick={handleRemoveImage}>Remove Image</Button>
-        </div>
-      ) : (
-        <div>
-           <img className="Img"
-              src={
-                files
-                  ? URL.createObjectURL(files[0])
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-              height={'300px'} />
-          <Input
-            accept="image/*"
-            id="image-upload"
-            type="file"
-            onChange={handleImageUpload}
-          />
-          <label htmlFor="image-upload">
-            <Button component="span">
-              Upload Image
-            </Button>
-          </label>
-        </div>
-      )}
-    </div>
-          </div>
+          
           <div className="right">
             
              {form}

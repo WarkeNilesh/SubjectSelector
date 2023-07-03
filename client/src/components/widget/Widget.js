@@ -12,18 +12,20 @@ const Widget = ({ choice }) => {
   let url;
 
   if (choice === 'course') {
-    url = '/course/getCourseCount';
+    url = '/course/getCoursecount';
    
   }
    if (choice === 'student') {
-    url = '/user/getStudentCount';
+    url = '/users/getStudentCount';
   }
 
   const CHOICE = choice ? choice.toUpperCase() : "";
 
 
-  const { data, loading, error } = useFetch(`http://localhost:4000${url}`);
-  console.log(data);
+  const { data, loading, error } = useFetch(`${url}`);
+
+
+
   
 
   return (

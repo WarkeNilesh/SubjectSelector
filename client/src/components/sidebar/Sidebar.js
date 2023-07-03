@@ -25,14 +25,14 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LoginIcon from '@mui/icons-material/Login';
 import InfoIcon from '@mui/icons-material/Info';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
+import useFetch from '../../hooks/useFetch';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext} from "react";
 import "./Sidebar.css"
 import { Link } from 'react-router-dom';
 const drawerWidth =240 ;
 
 
-const handleLogout = () => {
-  localStorage.setItem('userData', JSON.stringify(null));
-};
 
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -80,10 +80,33 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+function handleLogout() {
+  // Clear user key from local storage
+  localStorage.removeItem('user');
+  
+  // Redirect or perform other actions after logout
+  // For example, redirect to the login page
+  window.location.href = 'login';
+}
 
 export default function PersistentDrawerLeft(props) {
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
 
-  const {role}  = props;
+  const { user } = useContext(AuthContext);
+
+  if (user == null) {
+    <h5>loading....</h5>
+  }
+
+  const { data, loading } = useFetch(`/users/${user._id}`);
+  if (loading) {
+    return <h5>Loading....</h5>;
+  }
+
+  const role = data.isAdmin ? 'admin' : 'student';
+  console.log(role);
+
  
 
   let access;
@@ -102,7 +125,7 @@ export default function PersistentDrawerLeft(props) {
       
         <Link to={"/"+text[0]} style={{ textDecoration: "none" ,color:"black"} }>
         <ListItem key={text[0]} disablePadding>
-          <ListItemButton>
+        <ListItemButton onClick={text[0] === 'Logout' ? handleLogout : null}>
             <ListItemIcon>
             {text[1] }
             </ListItemIcon>
@@ -167,8 +190,6 @@ export default function PersistentDrawerLeft(props) {
   }
 
 
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);

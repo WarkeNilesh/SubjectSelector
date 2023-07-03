@@ -1,39 +1,35 @@
 import mongoose from "mongoose";
-import Course from "./Course.js";
-
-const UserSchema = new mongoose.Schema({
-    "name" : {
-        type : String,
-        required: true
+const UserSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    "username" : {
-        type : String,
-        required: true,
-        unique: true
+    email: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    "isadmin" : {
-        type : Boolean,
-        default: false
+    phone: {
+      type: String,
+      required: true,
     },
-    "email": {
-        type : String,
-        
+    password: {
+      type: String,
+      required: true,
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
     },
     "courses" : {
-        type : [Object],
-        required: false,
-        default : []
-    },
-    "mobile" : {
-        type : Number,
-        required: false
-    },
-    "password" : {
-        type : String,
-        required: true
-    },
-    
-},{timestamps:true})
+      type : [Object],
+      required: false,
+      default : []
+  },
+  },
+  { timestamps: true }
+);
 
-
-export default mongoose.model('users', UserSchema);
+export default mongoose.model("User", UserSchema);

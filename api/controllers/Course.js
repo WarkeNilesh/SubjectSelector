@@ -14,38 +14,38 @@ export const createCourse = async (req, res, next) => {
             return res.send("Course Already Exists");
         })
         .catch((err) => {
-            console.log(err);
+           next(err);
         });
 }
 
 // Syntax
-export const getCourse = async (req, res) => {
+export const getCourse = async (req, res,next) => {
     try {
         const course = await CourseModel.findOne(req.body);
         if(course == null) return res.send("Invalid Course")
         return res.status(200).json(course);
     } catch (err) {
-        res.status(500).json(err);
+       next(err);
     }
 }
 
 
-export const getCourses = async (req, res) => {
+export const getCourses = async (req, res,next) => {
 
     try {
         const users = await CourseModel.find();
         res.status(200).json(users);
     } catch (err) {
-        res.status(500).json(err);
+        next(err);
     }
 }
 
-export const getCourseCount = async (req, res) => {
+export const getCourseCount = async (req, res,next) => {
     try {
         const courseCount = await CourseModel.countDocuments();
         res.status(200).json({ count: courseCount });
     } catch (err) {
-        res.status(500).json(err);
+       next(err);
     }
 }
 
@@ -57,7 +57,7 @@ export const updateCourse = async (req, res, next) => {
             return await res.send(result == null ? "Invalid Course" : subjectData);
         })
         .catch((err) => {
-            console.log(err);
+           next(err);
         });
 }
 
@@ -77,7 +77,7 @@ export const addCourse = async (req, res, next) =>{
         })
     })
     .catch((err) => {
-        console.log(err);
+       next(err);
     });
     
 }
@@ -95,7 +95,7 @@ export const removeCourse = async (req, res, next) =>{
         })
     })
     .catch((err) => {
-        console.log(err);
+       next(err);
     });
 }
 
@@ -106,7 +106,7 @@ export const deleteCourse = async (req, res, next) => {
             return await res.send(result == null ? "Invalid Course" : "Courses Deleted Sucessfully");
         })
         .catch((err) => {
-            console.log(err);
+            next(err);
         });
 }
 

@@ -2,14 +2,14 @@ import Sidebar from "../../../components/sidebar/Sidebar";
 
 import "./dashbord.css";
 import Widget from "../../../components/widget/Widget";
+import Dashboardtable from "../../../components/table/dashboardtable"
 
-import All from "../../../components/table/table";
 
-const Home = (props) => {
-  const {role} = props;
+const Home = () => {
+  
   return (
     <div className="dashboard">
-     <Sidebar role = {role} />
+     <Sidebar  />
       <div className="homeContainer">
       
         <div className="widgets">
@@ -20,7 +20,7 @@ const Home = (props) => {
         
         <div className="listContainer">
           <div className="listTitle">STUDENTS WITH RESPECTIVE COURSES</div>
-          <All page = "dashboard" />
+          <Dashboardtable />
         </div>
       </div>
     </div>
