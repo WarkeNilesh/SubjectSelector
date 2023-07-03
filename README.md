@@ -5,10 +5,11 @@
 
 ## Tech Stack
 
-**Client:** React
+**Client:** HTML, CSS, React
 
 **Server:** NodeJs, Express
 
+**Database** MongoDB Atlas
 
 ## Screenshots
 
