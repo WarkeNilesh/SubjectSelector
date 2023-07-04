@@ -18,7 +18,7 @@
 
 ## Authors
 
-- [@Atharva Vaidya](www.linkedin.com/in/atharva-vaidya-4004)
+- [@Atharva Vaidya](https://www.linkedin.com/in/atharva-vaidya-4004)
 - [@Nilesh Warke](https://www.linkedin.com/in/warke-nilesh)
 - [@Vaibhav Nayak](https://www.linkedin.com/in/vaibhavnayak/)
 
