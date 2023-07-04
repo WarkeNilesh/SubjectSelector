@@ -19,9 +19,7 @@
 ## Authors
 
 - [@Atharva Vaidya](www.linkedin.com/in/atharva-vaidya-4004)
-
-- [@Nilesh Warke](https://www.linkedin.com/in/warke-nilesh))
-- 
+- [@Nilesh Warke](https://www.linkedin.com/in/warke-nilesh)
 - [@Vaibhav Nayak](https://www.linkedin.com/in/vaibhavnayak/)
 
 ## Installation
