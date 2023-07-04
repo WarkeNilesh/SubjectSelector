@@ -2,48 +2,18 @@ import "./course.css"
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Grid from '@mui/material/Grid';
 import FeaturedPost from '../../../components/FeaturedPost/featuredpost';
-
-
-const featuredPosts = [
-    {
-        title: 'Courses',
-        date: 'Nov 12',
-        description:
-            'Students Enrolled :- 450',
-        image: 'https://source.unsplash.com/random?wallpapers',
-        imageLabel: 'Image Text',
-    },
-    {
-        title: 'Courses',
-        date: 'Nov 11',
-        description:
-            'No of course :- 10',
-        image: 'https://source.unsplash.com/random?wallpapers',
-        imageLabel: 'Image Text',
-    },
-    {
-        title: 'Courses',
-        date: 'Nov 11',
-        description:
-            'No of course :- 10',
-        image: 'https://source.unsplash.com/random?wallpapers',
-        imageLabel: 'Image Text',
-    },
-    {
-        title: 'Courses',
-        date: 'Nov 11',
-        description:
-            'No of course :- 10',
-        image: 'https://source.unsplash.com/random?wallpapers',
-        imageLabel: 'Image Text',
-    },
-];
-
-
+import useFetch from "../../../hooks/useFetch";
+import { useContext } from "react";
+import { AuthContext } from '../../../context/AuthContext';
+import { CircularProgress } from "@mui/material";
 const New = () => {
-   
-  
+    const { user } = useContext(AuthContext);
 
+    if (user == null) {
+        <CircularProgress />
+    }
+    const { data} = useFetch("http://127.0.0.1:8800/api/course/getcourses");
+    
     return (
         <div className="course">
             <Sidebar />
@@ -61,8 +31,9 @@ const New = () => {
                 <div className="role"><h1>Ongoing Courses</h1></div>
 
                 <Grid container spacing={4}>
-                    {featuredPosts.map((post) => (
-                        <FeaturedPost key={post.title} post={post} button="Enroll..." />
+                    {data.map((obj) => (
+                        <FeaturedPost key={obj.course_code} post={obj} 
+                        username={user.username} button="ENROLL" />
                     ))}
                 </Grid>
             </div>
@@ -70,8 +41,8 @@ const New = () => {
                 <div className="role"><h1>Your Courses</h1></div>
 
                 <Grid container spacing={4}>
-                    {featuredPosts.map((post) => (
-                        <FeaturedPost key={post.title} post={post} button="REMOVE" />
+                    {user.courses.map((obj) => (
+                        <FeaturedPost key={obj.course_code} post={obj} button="REMOVE" />
                     ))}
                 </Grid>
             </div>

@@ -9,12 +9,24 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import "./table.css";
 import useFetch from "../../hooks/useFetch";
+import axios from "axios";
 
+import CircularProgress from "@mui/material/CircularProgress";
 const All = () => {
-
+  // const [data, setData] = useState(null);
   const { data, loading } = useFetch("/course/getcourses");
-
-
+  
+  async function  deleteCourse(course_code){
+    try{
+      const data = {"course_code" :course_code}
+      console.log(data);
+      await axios.delete(`http://127.0.0.1:8800/api/course/delete/${course_code}`);
+      console.log(course_code);
+      window.location.reload();
+    }
+    catch (err) {console.log(err)}
+    
+  }
   return (
     <TableContainer component={Paper} className="table">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -29,7 +41,11 @@ const All = () => {
 
         <TableBody>
         {loading ? (
-            "LOADING...."
+             <TableRow>
+             <TableCell align="center" colSpan={5}>
+               <CircularProgress />
+             </TableCell>
+           </TableRow>
           ) : (
             data &&
             data.map((data) => (
@@ -52,6 +68,7 @@ const All = () => {
                     variant="contained"
                     style={{ margin: "10px" }}
                     className="button"
+                    
                   >
                     UPDATE
                   </Button>
@@ -59,6 +76,7 @@ const All = () => {
                     variant="contained"
                     style={{ margin: "10px" }}
                     className="button"
+                    onClick={() => deleteCourse(data.course_code)}
                   >
                     DELETE
                   </Button>

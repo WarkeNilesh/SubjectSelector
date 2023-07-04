@@ -5,21 +5,21 @@ import Sidebar from "../../components/sidebar/Sidebar"
 import useFetch from '../../hooks/useFetch';
 import { AuthContext } from '../../context/AuthContext';
 import { useContext} from "react";
-
+import CircularProgress from "@mui/material/CircularProgress";
 const Profile = () => {
  const { user } = useContext(AuthContext);
 
   if (user == null) {
-    <h5>loading....</h5>
+    <CircularProgress />
   }
 
   const { data, loading } = useFetch(`/users/${user._id}`);
   if (loading) {
-    return <h5>Loading....</h5>;
+    <CircularProgress />
   }
 
   const role = data.isAdmin ? 'admin' : 'student';
-  console.log(role);
+ 
 
   let access;
   switch (role) {
@@ -37,7 +37,7 @@ const Profile = () => {
   }
 
  
-  console.log(data);
+
  
   return (
     <div className="Profile">

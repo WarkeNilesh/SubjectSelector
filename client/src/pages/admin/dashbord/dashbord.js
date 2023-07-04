@@ -1,15 +1,15 @@
-import Sidebar from "../../../components/sidebar/Sidebar";
 
+import AdminSidebar from "../../../components/sidebar/adminsidebar";
 import "./dashbord.css";
 import Widget from "../../../components/widget/Widget";
-import Dashboardtable from "../../../components/table/dashboardtable"
+import Studenttable from "../../../components/table/studenttable"
 
 
 const Home = () => {
   
   return (
     <div className="dashboard">
-     <Sidebar  />
+     <AdminSidebar />
       <div className="homeContainer">
       
         <div className="widgets">
@@ -20,7 +20,7 @@ const Home = () => {
         
         <div className="listContainer">
           <div className="listTitle">STUDENTS WITH RESPECTIVE COURSES</div>
-          <Dashboardtable />
+          <Studenttable />
         </div>
       </div>
     </div>

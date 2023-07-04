@@ -3,19 +3,22 @@ import bcrypt from "bcryptjs";
 import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
-export const register = async (req, res, next) => {
+export const register = async (req, res,next) => {
   try {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
-
+    
     const newUser = new User({
       ...req.body,
       password: hash,
     });
+    console.log(newUser);
     await newUser.save();
+    console.log('alare');
+    
     res.status(200).send("User has been created.");
   } catch (err) {
-    next(err);
+    res.status(400).send(err);
   }
 };
 export const login = async (req, res, next) => {

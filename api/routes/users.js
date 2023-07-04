@@ -13,23 +13,23 @@ const router = express.Router();
 
 
 // Get students
-router.get("/getstudents",verifyAdmin, getStudents)
+router.get("/getstudents", getStudents)
 
 
 //Get student count
-router.get("/getStudentCount",verifyAdmin, getStudentCount)
+router.get("/getStudentCount", getStudentCount)
 //UPDATE
-router.put("/:id", verifyUser, updateUser)
+router.put("/:id",  updateUser)
 
 //DELETE
-router.delete("/:id", verifyUser, deleteUser)
+router.delete("/delete/:username",  deleteUser)
 
 //GET
-router.get("/:id", verifyUser, getUser)
+router.get("/:id",  getUser)
 
 
 
 
 //GET ALL
-router.get("/", verifyAdmin, getUsers);
+router.get("/",  getUsers);
 export default router;

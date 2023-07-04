@@ -9,14 +9,24 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import "./table.css";
 import useFetch from "../../hooks/useFetch";
+import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const All = () => {
+  const { data, loading } = useFetch("http://127.0.0.1:8800/api/users/getstudents");
+  
+  async function  deleteStudent(username){
+    try{
+      await axios.delete(`http://127.0.0.1:8800/api/users/delete/${username}`);
+
+      window.location.reload();
+    }
+    catch (err) {console.log(err)}
+    
+  }
 
 
-  const { data, loading } = useFetch("/users/getstudents");
-
-  console.log(data);
-
+ 
   return (
     <TableContainer component={Paper} className="table">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -25,7 +35,6 @@ const All = () => {
           <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >PRN</TableCell>
           <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >Name</TableCell>
           <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >College mail ID</TableCell>
-          <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >Contact no</TableCell>
           <TableCell className="tableCell"  align="center" valign="middle"  style={{backgroundColor:"#0059B2", color: "white",fontSize : "20px"}} >Action</TableCell>
 
           </TableRow>
@@ -33,7 +42,11 @@ const All = () => {
 
         <TableBody>
         {loading ? (
-            "LOADING...."
+           <TableRow>
+           <TableCell align="center" colSpan={5}>
+             <CircularProgress />
+           </TableCell>
+         </TableRow>
           ) : (
             data &&
             data.map((data) => (
@@ -52,7 +65,7 @@ const All = () => {
                 </TableCell>
 
                 <TableCell className="tableCell" align="center" valign="middle">{data.email}</TableCell>
-                <TableCell className="tableCell" align="center" valign="middle">{data.phone}</TableCell>
+                
 
                 <TableCell className="tableCell" align="center" valign="middle">
                   <Button
@@ -66,6 +79,7 @@ const All = () => {
                     variant="contained"
                     style={{ margin: "10px" }}
                     className="button"
+                    onClick={()=>{ deleteStudent(data.username)}}
                   >
                     DELETE
                   </Button>

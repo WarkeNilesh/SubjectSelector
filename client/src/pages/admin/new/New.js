@@ -1,8 +1,7 @@
 import "./new.css";
-import Sidebar from "../../../components/sidebar/Sidebar";
+import AdminSidebar from "../../../components/sidebar/adminsidebar";
 import { Link } from "react-router-dom";
 import Button from '@mui/material/Button'
-import { useEffect, useState } from "react";
 import Studenttable from '../../../components/table/studenttable';
 import Coursetable from '../../../components/table/coursetable';
 
@@ -15,7 +14,7 @@ const New = (props) => {
 
   return (
     <div className="new">
-       <Sidebar />
+       <AdminSidebar />
       <div className="newContainer">
      
         <div className="top" style={{margin: '20px', marginTop :'100px', padding:'0px', paddingLeft:'30px'}}>

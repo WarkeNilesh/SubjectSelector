@@ -1,11 +1,9 @@
 
 import Sidebar from "../../../components/sidebar/Sidebar";
 
-import { useState } from "react";
-
 import axios from "axios";
 import * as React from 'react';
-import Grid from '@mui/material/Grid';
+
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -25,12 +23,13 @@ const Newentity = (props) => {
       'username' : formData.get('username'),
       'name' : formData.get('name'),
       'email' : formData.get('email'),
-      'contact_no': formData.get('contact_no'),
+      'phone': formData.get('contact_no'),
       'password':formData.get('password')
     }
-    // console.log(data);
+    
     try {
-      await axios.post("/auth/register", data);
+
+      await axios.post("http://127.0.0.1:8800/api/auth/register", data);
     } 
     catch (err) {console.log(err)}
   };
@@ -44,7 +43,7 @@ const Newentity = (props) => {
       'name' : formData.get('course_name'),
       'faculty' : formData.get('faculty')
     }
-    // console.log(data);
+    console.log(data);
     try {
       await axios.post("http://127.0.0.1:8800/api/course/create", data);
     } 
@@ -184,6 +183,8 @@ const Newentity = (props) => {
       );
      
       break;
+      default:
+        break;
       
   }
 

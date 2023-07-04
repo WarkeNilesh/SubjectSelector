@@ -1,7 +1,7 @@
 import CourseModel from "../models/Course.js";
 import UserModel from "../models/User.js";
 
-export const createCourse = async (req, res, next) => {
+export const createCourse = async (req, res) => {
     const subjectData = req.body;
     console.log("I was called for creating course");
     return await CourseModel.findOne({ course_code: subjectData["course_code"] })
@@ -14,61 +14,62 @@ export const createCourse = async (req, res, next) => {
             return res.send("Course Already Exists");
         })
         .catch((err) => {
-           next(err);
+           res.status(400).json(err);
         });
 }
 
 // Syntax
-export const getCourse = async (req, res,next) => {
+export const getCourse = async (req, res) => {
     try {
         const course = await CourseModel.findOne(req.body);
         if(course == null) return res.send("Invalid Course")
         return res.status(200).json(course);
     } catch (err) {
-       next(err);
+       res.status(400).json(err);
     }
 }
 
 
-export const getCourses = async (req, res,next) => {
+export const getCourses = async (req, res) => {
 
     try {
         const users = await CourseModel.find();
         res.status(200).json(users);
     } catch (err) {
-        next(err);
+        res.status(400).json(err);
     }
 }
 
-export const getCourseCount = async (req, res,next) => {
+export const getCourseCount = async (req, res) => {
     try {
         const courseCount = await CourseModel.countDocuments();
         res.status(200).json({ count: courseCount });
     } catch (err) {
-       next(err);
+       res.status(400).json(err);
     }
 }
 
 
-export const updateCourse = async (req, res, next) => {
+export const updateCourse = async (req, res) => {
     const subjectData = req.body;
     return await CourseModel.findOneAndUpdate({ course_code: subjectData['course_code'] }, subjectData)
         .then(async (result) => {
             return await res.send(result == null ? "Invalid Course" : subjectData);
         })
         .catch((err) => {
-           next(err);
+           res.status(400).json(err);
         });
 }
 
 // Add Course for student
-export const addCourse = async (req, res, next) =>{
-    UserModel.findOne({"username":req.user['username']})
+export const addCourse = async (req, res) =>{
+    UserModel.findOne({"username":req.body['username']})
     .then(async (user)=>{
         CourseModel.findOne({"course_code": req.body['course_code']})
         .then(async (course)=>{
             if(course == null) return res.send("Invalid Course Selected");
             if(user.courses.find(obj => obj.course_code === course.course_code) != undefined){
+                console.log(req.body);
                 return await res.send("Already Enrolled");
             }
             user.courses.push(course);
@@ -77,13 +78,13 @@ export const addCourse = async (req, res, next) =>{
         })
     })
     .catch((err) => {
-       next(err);
+       res.status(400).json(err);
     });
     
 }
 
 // Remove Course for student
-export const removeCourse = async (req, res, next) =>{
+export const removeCourse = async (req, res) =>{
     UserModel.findOne({"username":req.user['username']})
     .then(async (user)=>{
         CourseModel.findOne({"course_code": req.body['course_code']})
@@ -95,18 +96,19 @@ export const removeCourse = async (req, res, next) =>{
         })
     })
     .catch((err) => {
-       next(err);
+       res.status(400).json(err);
     });
 }
 
-export const deleteCourse = async (req, res, next) => {
-    const subjectData = req.body;
-    return await CourseModel.findOneAndDelete({ course_code: subjectData['course_code'] })
+export const deleteCourse = async (req, res) => {
+    const subjectData = req.params.course_code;
+    console.log(subjectData);
+    return await CourseModel.findOneAndDelete({ course_code: subjectData })
         .then(async (result) => {
             return await res.send(result == null ? "Invalid Course" : "Courses Deleted Sucessfully");
         })
         .catch((err) => {
-            next(err);
+            res.status(400).json(err);
         });
 }
 
