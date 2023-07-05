@@ -1,28 +1,25 @@
 import express from "express";
 import {
-  updateUser,
-  deleteUser,
+  
   getUser,
-  getUsers,
+  updateUser,
   getStudents,
   getStudentCount,
+  getStudent,
 } from "../controllers/user.js";
-import { verifyAdmin, verifyToken, verifyUser } from "../utils/verifyToken.js";
+
 
 const router = express.Router();
 
 
 // Get students
 router.get("/getstudents", getStudents)
-
-
+router.get("/getstudent/:username", getStudent)
+//update
+router.put("/update", updateUser)
 //Get student count
 router.get("/getStudentCount", getStudentCount)
-//UPDATE
-router.put("/:id",  updateUser)
 
-//DELETE
-router.delete("/delete/:username",  deleteUser)
 
 //GET
 router.get("/:id",  getUser)
@@ -30,6 +27,5 @@ router.get("/:id",  getUser)
 
 
 
-//GET ALL
-router.get("/",  getUsers);
+
 export default router;

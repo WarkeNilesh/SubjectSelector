@@ -21,9 +21,15 @@ export const createCourse = async (req, res) => {
 // Syntax
 export const getCourse = async (req, res) => {
     try {
-        const course = await CourseModel.findOne(req.body);
-        if(course == null) return res.send("Invalid Course")
-        return res.status(200).json(course);
+        await CourseModel.findOne({"course_code": req.params.course_code})
+        .then((course)=>{
+            console.log(req.params.course_code);
+            if(course == null) return res.status(200).json("Invalid Course");
+            return res.status(200).json(course);
+        })
+        .catch(err=>{console.log(err);})
+        console.log(req.params.course_code);
+
     } catch (err) {
        res.status(400).json(err);
     }

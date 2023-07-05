@@ -9,7 +9,7 @@ router.post("/create",  createCourse)
 router.post("/addcourse",  addCourse)
 
 //read
-router.get("/getcourse", getCourse)
+router.get("/getcourse/:course_code", getCourse)
 router.get("/getcourses", getCourses)
 
 
