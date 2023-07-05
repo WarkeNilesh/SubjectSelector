@@ -1,9 +1,8 @@
 
-import Sidebar from "../../../components/sidebar/Sidebar";
+import AdminSidebar from "../../../components/sidebar/adminsidebar";
 
 import axios from "axios";
 import * as React from 'react';
-
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -12,7 +11,7 @@ import "./newentity.css";
 
 
 const Newentity = (props) => {
-  const { role,choice } = props;
+  const { choice } = props;
   const uppercaseChoice = choice.toUpperCase();
 
 
@@ -23,7 +22,7 @@ const Newentity = (props) => {
       'username' : formData.get('username'),
       'name' : formData.get('name'),
       'email' : formData.get('email'),
-      'phone': formData.get('contact_no'),
+     
       'password':formData.get('password')
     }
     
@@ -103,15 +102,7 @@ const Newentity = (props) => {
                 id="password"
                 autoComplete="password"
               />
-               <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="contact_no"
-                label="contact_no"
-                id="contact_no"
-                autoComplete="contact_no"
-              />
+               
               <Button
                 type="submit"
                 fullWidth
@@ -193,7 +184,7 @@ const Newentity = (props) => {
     <div className="new">
       
       <div className="newContainer">
-      <Sidebar role = {role} />
+      <AdminSidebar />
         <div className="top" >
           <h1> ADD NEW {uppercaseChoice}</h1>
         </div>

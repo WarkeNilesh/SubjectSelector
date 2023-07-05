@@ -9,6 +9,7 @@ import New from './pages/admin/new/New';
 import Dashboard from '../src/pages/admin/dashbord/dashbord'
 import NewEntity from '../src/pages/admin/newentity/newentity'
 import Course from '../../client/src/pages/student/course/course'
+import Updateentity from './pages/admin/newentity/updateentity';
 function App() {
   
   return (
@@ -23,6 +24,9 @@ function App() {
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/Newentitycourse" element={<NewEntity choice = 'course' />} />
           <Route exact path="/Newentitystudent" element={<NewEntity choice = 'student' />} />
+          <Route exact path="/course/redirect-page.html" element={<Updateentity choice = 'course' />} />
+          <Route exact path="/user/redirect-page.html" element={<Updateentity choice = 'student' />} />
+
           <Route exact path="/course" element={<Course />} />
           <Route exact path="/home" element={<Homepage />} />
           

@@ -13,8 +13,14 @@ import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const All = () => {
-  const { data, loading } = useFetch("http://127.0.0.1:8800/api/users/getstudents");
-  
+  const { data, loading ,reFetch} = useFetch("/users/getstudents");
+  console.log(data);
+  function  updatestudent(username){
+    const url = '/user/redirect-page.html?course_code=' + encodeURIComponent(username);
+    window.location.href = url;
+   
+  }
+
   async function  deleteStudent(username){
     try{
       await axios.delete(`http://127.0.0.1:8800/api/users/delete/${username}`);
@@ -72,6 +78,7 @@ const All = () => {
                     variant="contained"
                     style={{ margin: "10px" }}
                     className="button"
+                    onClick={()=>{updatestudent(data.username)}}
                   >
                     UPDATE
                   </Button>

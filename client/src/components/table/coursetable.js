@@ -10,12 +10,23 @@ import Button from "@mui/material/Button";
 import "./table.css";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 const All = () => {
+  const navigate = useNavigate();
   // const [data, setData] = useState(null);
   const { data, loading } = useFetch("/course/getcourses");
+
+
   
+   function  updateCourse(course_code){
+    const url = '/course/redirect-page.html?course_code=' + encodeURIComponent(course_code);
+    window.location.href = url;
+   
+  }
+
+
+
   async function  deleteCourse(course_code){
     try{
       const data = {"course_code" :course_code}
@@ -68,7 +79,7 @@ const All = () => {
                     variant="contained"
                     style={{ margin: "10px" }}
                     className="button"
-                    
+                    onClick={() => updateCourse(data.course_code)}
                   >
                     UPDATE
                   </Button>
