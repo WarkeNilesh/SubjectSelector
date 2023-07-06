@@ -18,16 +18,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import HomeIcon from '@mui/icons-material/Home';
-import PersonIcon from '@mui/icons-material/Person';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import LoginIcon from '@mui/icons-material/Login';
-import InfoIcon from '@mui/icons-material/Info';
-import ContactPageIcon from '@mui/icons-material/ContactPage';
-import useFetch from '../../hooks/useFetch';
-import { AuthContext } from '../../context/AuthContext';
-import { useContext} from "react";
 import "./Sidebar.css"
 import { Link } from 'react-router-dom';
 const drawerWidth =240 ;
@@ -93,103 +85,6 @@ export default function PersistentDrawerLeft(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  const { user } = useContext(AuthContext);
-
-  if (user == null) {
-    <h5>loading....</h5>
-  }
-
-  const { data, loading } = useFetch(`/users/${user._id}`);
-  if (loading) {
-    return <h5>Loading....</h5>;
-  }
-
-  const role = data.isAdmin ? 'admin' : 'student';
-  console.log(role);
-
- 
-
-  let access;
-  switch (role) {
-    
-    case 'admin':
-
-    access = ( 
-      <>
-       {[['home', <HomeIcon />] ,
-       ['dashboard', <DashboardIcon />],
-      ['students', <PersonIcon />],
-      ['courses', <LibraryBooksIcon />],
-      ['profile', <ManageAccountsIcon />],
-       ['Logout', <LogoutIcon />] ,].map((text) => (
-      
-        <Link to={"/"+text[0]} style={{ textDecoration: "none" ,color:"black"} }>
-        <ListItem key={text[0]} disablePadding>
-        <ListItemButton onClick={text[0] === 'Logout' ? handleLogout : null}>
-            <ListItemIcon>
-            {text[1] }
-            </ListItemIcon>
-            <ListItemText primary={text[0]} />
-          </ListItemButton>
-        </ListItem>
-        </Link> 
-       ))}
-      </>
-    );
-
-     
-      break;
-    case 'student':
-      access = (
-        <>
-         {[['home', <HomeIcon />] ,
-       
-      ['course', <LibraryBooksIcon />],
-      ['profile', <ManageAccountsIcon />],
-       ['Logout', <LogoutIcon />] ,].map((text) => (
-        
-        <Link to={"/"+text[0]} style={{ textDecoration: "none" ,color:"black"} }>
-        <ListItem key={text[0]} disablePadding>
-
-          <ListItemButton onClick={text[0] === 'Logout' ? handleLogout : null}>
-            <ListItemIcon>
-            {text[1] }
-            </ListItemIcon>
-            <ListItemText primary={text[0]} />
-          </ListItemButton>
-        </ListItem>
-        </Link> 
-       ))}
-        </>
-      );
-      break;
-      case 'home':
-      access = (
-        <>
-         {[['home', <HomeIcon />] ,
-       
-        ['ContactUs', <ContactPageIcon />],
-        ['AboutUs', <InfoIcon />],
-        ['Login', <LoginIcon />] ,].map((text) => (
-      
-        <Link to={"/"+text[0]} style={{ textDecoration: "none" ,color:"black"} }>
-        <ListItem key={text[0]} disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-            {text[1] }
-            </ListItemIcon>
-            <ListItemText primary={text[0]} />
-          </ListItemButton>
-        </ListItem>
-        </Link> 
-       ))}
-        </>
-      );
-      break;
-    
-  }
-
-
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -240,7 +135,24 @@ export default function PersistentDrawerLeft(props) {
         </DrawerHeader>
         <Divider />
         <List>
-            {access}
+        {[['home', <HomeIcon />] ,
+       
+       ['course', <LibraryBooksIcon />],
+       ['profile', <ManageAccountsIcon />],
+        ['Logout', <LogoutIcon />] ,].map((text) => (
+         
+         <Link to={"/"+text[0]} style={{ textDecoration: "none" ,color:"black"} }>
+         <ListItem key={text[0]} disablePadding>
+ 
+           <ListItemButton onClick={text[0] === 'Logout' ? handleLogout : null}>
+             <ListItemIcon>
+             {text[1] }
+             </ListItemIcon>
+             <ListItemText primary={text[0]} />
+           </ListItemButton>
+         </ListItem>
+         </Link> 
+        ))}
         </List>
        
       </Drawer>

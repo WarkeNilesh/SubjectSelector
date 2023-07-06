@@ -181,10 +181,10 @@ const Newentity = (props) => {
 
 
   return (
-    <div className="new">
+    <div className="new" style={{paddingTop : "60px"}}>
       
-      <div className="newContainer">
       <AdminSidebar />
+      <div className="newContainer" >
         <div className="top" >
           <h1> ADD NEW {uppercaseChoice}</h1>
         </div>

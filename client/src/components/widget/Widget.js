@@ -1,10 +1,6 @@
 import "./widget.css";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import BookIcon from '@mui/icons-material/Book';
 import useFetch from "../../hooks/useFetch";
 import { Link } from "react-router-dom";
-import LoadingButton from '@mui/lab/LoadingButton/LoadingButton';
-
 
 const Widget = ({ choice }) => {
   

@@ -49,6 +49,17 @@ export const updateUser = async (req, res) => {
 }
 
 
+export const deleteUser = async (req,res)=>{
+  console.log("delete user");
+  try {
+    await User.findOneAndDelete({"username": req.params.username});
+    res.status(200).json("User has been deleted.");
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
+
 
 export const getStudentCount = async (req, res,next) => {
   try {

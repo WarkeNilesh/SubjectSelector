@@ -17,7 +17,7 @@ router.get("/getcourses", getCourses)
 router.put("/update",  updateCourse)
 //delete
 router.delete("/delete/:course_code",  deleteCourse)
-router.delete("/removecourse",  removeCourse)
+router.post("/removecourse",  removeCourse)
 
 
 export default router

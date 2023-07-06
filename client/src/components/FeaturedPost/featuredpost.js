@@ -10,7 +10,7 @@ import axios from 'axios';
 function FeaturedPost(props) {
   const { post, username, button } = props;
   const enrollCourse = async (course_code) =>{
-      console.log(username, course_code);
+      console.log(username, course_code, "For Enrolling ");
       try{
         await axios.post("http://127.0.0.1:8800/api/course/addcourse", {'username':username, 'course_code':course_code})
         .then((res)=>{
@@ -23,6 +23,22 @@ function FeaturedPost(props) {
       catch(err){
         console.log(err);
       }
+  }
+  const derollCourse = async (course_code) => {
+    console.log(username, course_code, "For Deroll");
+    try{
+      if(username ===undefined || course_code === undefined) return;
+      await axios.post("http://127.0.0.1:8800/api/course/removecourse", {'username':username, 'course_code':course_code})
+      .then((res)=>{
+        console.log(res.data);
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    }
+    catch(err){
+      console.log(err);
+    }
   }
   return (
     <Grid item xs={12} md={6}>
@@ -45,7 +61,7 @@ function FeaturedPost(props) {
               {post.faculty}
             </Typography>
             <Typography variant="subtitle1" color="primary">
-              <Button  variant='contained' onClick={()=>{enrollCourse(post.course_code)}}> {button}</Button>
+              <Button  variant='contained' onClick={()=>{ if(button === 'ENROLL'){enrollCourse(post.course_code)}else{derollCourse(post.course_code)}}}> {button}</Button>
               
             </Typography>
           </CardContent>

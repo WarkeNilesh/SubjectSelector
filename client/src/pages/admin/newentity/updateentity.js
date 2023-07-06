@@ -70,7 +70,7 @@ const Updateentity = (props) => {
     }
     console.log(data);
     try {
-      await axios.post("http://127.0.0.1:8800/api/course/create", data);
+      await axios.put("http://127.0.0.1:8800/api/course/update", data);
     } 
     catch (err) {console.log(err)}
   };
@@ -97,7 +97,7 @@ const Updateentity = (props) => {
                 id="username"
                 
                 name="username"
-                placeholder={data.username}
+                value={data.username}
                 autoComplete="username"
                 autoFocus
               />
@@ -156,7 +156,7 @@ const Updateentity = (props) => {
                 id="course_name"
                 
                 name="course_name"
-                value={data.name}
+                placeholder={data.name}
                 autoComplete="course_name"
                 autoFocus
               />
@@ -177,7 +177,7 @@ const Updateentity = (props) => {
                 name="faculty"
                 
                 id="faculty"
-                value={data.faculty}
+                placeholder={data.faculty}
                 autoComplete="faculty"
               />
               <Button

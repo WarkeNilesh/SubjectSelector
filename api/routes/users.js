@@ -6,6 +6,7 @@ import {
   getStudents,
   getStudentCount,
   getStudent,
+  deleteUser,
 } from "../controllers/user.js";
 
 
@@ -20,6 +21,8 @@ router.put("/update", updateUser)
 //Get student count
 router.get("/getStudentCount", getStudentCount)
 
+
+router.delete("/delete/:username", deleteUser)
 
 //GET
 router.get("/:id",  getUser)

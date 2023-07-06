@@ -91,7 +91,7 @@ export const addCourse = async (req, res) =>{
 
 // Remove Course for student
 export const removeCourse = async (req, res) =>{
-    UserModel.findOne({"username":req.user['username']})
+    UserModel.findOne({"username":req.body['username']})
     .then(async (user)=>{
         CourseModel.findOne({"course_code": req.body['course_code']})
         .then(async (course)=>{
