@@ -10,12 +10,11 @@ import Button from "@mui/material/Button";
 import "./table.css";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
 import CircularProgress from "@mui/material/CircularProgress";
 const All = () => {
-  const navigate = useNavigate();
-  // const [data, setData] = useState(null);
-  const { data, loading } = useFetch("/course/getcourses");
+
+  const { data, loading } = useFetch("http://127.0.0.1:8800/api/course/getcourses");
 
 
   

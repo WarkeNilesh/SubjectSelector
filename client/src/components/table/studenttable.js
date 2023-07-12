@@ -13,7 +13,7 @@ import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const All = () => {
-  const { data, loading ,reFetch} = useFetch("/users/getstudents");
+  const { data, loading } = useFetch("http://127.0.0.1:8800/api/users/getstudents");
   console.log(data);
   function  updatestudent(username){
     const url = '/user/redirect-page.html?course_code=' + encodeURIComponent(username);

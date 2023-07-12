@@ -33,7 +33,7 @@ const Updateentity = (props) => {
   {
     url = `/api/users/getstudent/${attributeValue}`;
   }
-  const { data } = useFetch(`http://localhost:8800${url}`);
+  const { data } = useFetch(`http://127.0.0.1:8800${url}`);
   const uppercaseChoice = choice.toUpperCase();
 
 

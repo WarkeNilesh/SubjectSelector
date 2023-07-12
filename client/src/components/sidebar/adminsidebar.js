@@ -144,7 +144,8 @@ export default function PersistentDrawerLeft(props) {
       ['profile', <ManageAccountsIcon />],
        ['Logout', <LogoutIcon />] ,].map((text) => (
       
-        <Link to={"/"+text[0]} style={{ textDecoration: "none" ,color:"black"} }>
+        <Link  to={text[0] === 'home' ? "/" : "/"+text[0]}
+         style={{ textDecoration: "none" ,color:"black"} }>
         <ListItem key={text[0]} disablePadding>
         <ListItemButton onClick={text[0] === 'Logout' ? handleLogout : null}>
             <ListItemIcon>

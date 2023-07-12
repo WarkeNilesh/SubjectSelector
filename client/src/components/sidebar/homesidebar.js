@@ -72,14 +72,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-function handleLogout() {
-  // Clear user key from local storage
-  localStorage.removeItem('user');
-  
-  // Redirect or perform other actions after logout
-  // For example, redirect to the login page
-  window.location.href = 'login';
-}
+
 
 export default function PersistentDrawerLeft(props) {
   const theme = useTheme();
@@ -142,7 +135,9 @@ export default function PersistentDrawerLeft(props) {
        ['AboutUs', <InfoIcon />],
        ['Login', <LoginIcon />] ,].map((text) => (
      
-       <Link to={"/"+text[0]} style={{ textDecoration: "none" ,color:"black"} }>
+       <Link 
+       to={text[0] === 'home' ? "/" : "/"+text[0]}
+        style={{ textDecoration: "none" ,color:"black"} }>
        <ListItem key={text[0]} disablePadding>
          <ListItemButton>
            <ListItemIcon>

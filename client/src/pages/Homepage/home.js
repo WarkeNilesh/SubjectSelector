@@ -2,24 +2,22 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import MainFeaturedPost from '../../components/MainFeaturedPost/mainfeaturedpost';
-import FeaturedPost from '../../components/FeaturedPost/featuredpost';
 import Homesidebar from "../../../src/components/sidebar/homesidebar";
-import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import "./home.css"
-
+import img from './idol.jpg'
 
 const mainFeaturedPost = {
   title: 'Walchand college of engineering,Sangli',
   description:
-    "Walchand College of Engineering is situated midway between Sangli and Miraj cities at Vishrambag, Sangli. The WCE campus is located on about 90 acres of land on southern side of Sangli ? Miraj road.",
-  image: 'https://source.unsplash.com/random?wallpapers',
+"  Walchand College of Engineering became autonomous in 2007. The college revamped its academic structure and contents, in consultation with few US and IIT academic experts",
+  image: img,
   imageText: 'main image description',
-  linkText: 'Continue reading…',
+  // linkText: 'Continue reading…',
 };
 
 const post = [
@@ -67,6 +65,7 @@ export default function Blog() {
         <div className="newContainer">
 
           <MainFeaturedPost post={mainFeaturedPost} />
+          
           <Grid container spacing={4}>
             <Grid item xs={12} md={6}>
               <CardActionArea component="a" href="#">
