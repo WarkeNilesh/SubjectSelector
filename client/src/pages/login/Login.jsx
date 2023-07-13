@@ -25,14 +25,15 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
+      console.log('in');
       const res = await axios.post(`${baseurl}/api/auth/login`, credentials);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       if(res.data.isAdmin){
         navigate("/adminprofile");
       }
-      else{
+      if(!res.data.isAdmin)
         navigate("/profile");
-      }
+      
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
