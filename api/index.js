@@ -12,6 +12,8 @@ import bodyParser from "body-parser";
 const app = express();
 dotenv.config();
 
+const port = process.env.PORT || 8800
+
 const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGO);
@@ -49,7 +51,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(8800, () => {
+app.listen(port, () => {
   connect();
   console.log("Connected to backend.");
 });

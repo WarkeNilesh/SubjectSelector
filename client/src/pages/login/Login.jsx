@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import "./login.css";
 import imag from './college.jpg'
+import { baseurl } from "../../services/helper";
+import useBackButtonReload from "../../hooks/backbutton";
 const Login = () => {
+  useBackButtonReload();
   const [credentials, setCredentials] = useState({
     username: undefined,
     password: undefined,
@@ -22,7 +25,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("http://127.0.0.1:8800/api/auth/login", credentials);
+      const res = await axios.post(`${baseurl}/api/auth/login`, credentials);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       if(res.data.isAdmin){
         navigate("/adminprofile");
